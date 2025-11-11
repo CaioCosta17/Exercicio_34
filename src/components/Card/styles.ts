@@ -65,7 +65,7 @@ export const Description = styled.p`
   font-size: 14px;
   line-height: 22px;
   margin-bottom: 16px;
-  color: ${colors.textGray};
+  color: ${colors.lightBg};
 `
 
 export const Button = styled(Link)`

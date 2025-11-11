@@ -32,7 +32,7 @@ export const Banner = styled.div<{ $backgroundImage: string }>`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); // Overlay escuro
+    background-color: rgba(0, 0, 0, 0.4);
   }
 `
 
@@ -64,9 +64,10 @@ export const BannerContent = styled.div`
 
 export const DishList = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; // Três colunas
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 32px;
   padding: 80px 0;
+  color: #ffebd9;
 
   @media (max-width: 1024px) {
     grid-template-columns: 1fr 1fr;
