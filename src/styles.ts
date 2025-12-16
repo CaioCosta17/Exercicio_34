@@ -1,34 +1,30 @@
+import { createGlobalStyle } from 'styled-components'
+
 export const colors = {
-  primaryRed: '#E66767',
-  lightBg: '#FFEBD9',
+  primary: '#E66767',
   white: '#FFFFFF',
-  textGray: '#4B4B4B',
-  darkText: '#101010',
-  starYellow: '#FFB800'
+  background: '#FFF8F2',
+  footerHeaderBg: '#FFEBD9',
+  yellow: '#FFB930'
 }
 
-export const GlobalStyle = `
+export const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+    list-style: none;
   }
 
   body {
-    background-color: ${colors.lightBg};
-    color: ${colors.textGray};
-  }
-
-  a {
-    text-decoration: none;
-    color: inherit;
+    background-color: #FFF8F2;
+    color: #E66767;
   }
 
   .container {
     max-width: 1024px;
     width: 100%;
     margin: 0 auto;
-    padding: 0 16px;
   }
 `
