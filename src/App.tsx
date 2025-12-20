@@ -1,15 +1,22 @@
+import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
-import { GlobalStyle } from './styles'
+
 import Rotas from './routes/routes'
+import { store } from './store'
+import { GlobalStyle } from './styles'
 import Footer from './components/Footer'
+import Cart from './components/Cart'
 
 function App() {
   return (
-    <BrowserRouter>
+    <Provider store={store}>
       <GlobalStyle />
-      <Rotas />
-      <Footer />
-    </BrowserRouter>
+      <BrowserRouter>
+        <Rotas />
+        <Cart />
+        <Footer />
+      </BrowserRouter>
+    </Provider>
   )
 }
 

@@ -1,3 +1,7 @@
+import { useDispatch } from 'react-redux'
+
+import { add, open } from '../../store/cartSlice'
+
 import {
   ModalContainer,
   ModalContent,
@@ -11,6 +15,7 @@ interface ModalProps {
   isOpen: boolean
   onClose: () => void
   prato: {
+    id: number
     foto: string
     nome: string
     descricao: string
@@ -20,7 +25,15 @@ interface ModalProps {
 }
 
 const Modal = ({ isOpen, onClose, prato }: ModalProps) => {
+  const dispatch = useDispatch()
+
   if (!isOpen || !prato) return null
+
+  const addToCart = () => {
+    dispatch(add(prato))
+    dispatch(open())
+    onClose()
+  }
 
   return (
     <ModalContainer>
@@ -34,7 +47,10 @@ const Modal = ({ isOpen, onClose, prato }: ModalProps) => {
           <h3>{prato.nome}</h3>
           <p>{prato.descricao}</p>
           <p>Serve: {prato.porcao}</p>
-          <button>Adicionar ao carrinho - R$ {prato.preco.toFixed(2)}</button>
+          <button onClick={addToCart}>
+            Adicionar ao carrinho - R${' '}
+            {prato.preco.toFixed(2).replace('.', ',')}
+          </button>
         </Conteudo>
       </ModalContent>
     </ModalContainer>

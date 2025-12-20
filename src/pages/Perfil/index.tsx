@@ -46,10 +46,7 @@ const Perfil = () => {
           {pratos.map((prato) => (
             <Prato
               key={prato.id}
-              id={prato.id}
-              nome={prato.nome}
-              descricao={prato.descricao}
-              foto={prato.foto}
+              prato={prato} // Passa o objeto completo aqui
               aoClicar={() => abrirModal(prato)}
             />
           ))}

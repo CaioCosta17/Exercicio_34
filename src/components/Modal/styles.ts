@@ -49,7 +49,10 @@ export const ModalContent = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    align-items: center;
+    padding: 16px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
   }
 
   > header {
@@ -95,7 +98,8 @@ export const ImagemPrato = styled.img`
 
   @media (max-width: 768px) {
     width: 100%;
-    max-width: 280px;
+    height: 200px;
+    margin-bottom: 16px;
   }
 `
 
