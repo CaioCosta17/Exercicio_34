@@ -1,13 +1,19 @@
 import styled from 'styled-components'
 import { colors } from '../../styles'
 
-export const ImagemFundo = styled.div`
+interface ImagemFundoProps {
+  capa: string
+}
+
+export const ImagemFundo = styled.div<ImagemFundoProps>`
   width: 100%;
   height: 280px;
   display: block;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  background-image: url(${(props) => props.capa});
+
   position: relative;
 
   &::after {
@@ -34,12 +40,12 @@ export const ImagemFundo = styled.div`
 
 export const Titulo = styled.h2`
   font-size: 32px;
-  color: ${colors.white};
   font-weight: 900;
+  color: ${colors.white};
 `
 
-export const Categoria = styled.p`
+export const Tipo = styled.p`
   font-size: 32px;
-  color: ${colors.white};
   font-weight: 100;
+  color: ${colors.white};
 `

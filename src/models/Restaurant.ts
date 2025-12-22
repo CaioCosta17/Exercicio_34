@@ -1,8 +1,19 @@
-export type Restaurant = {
+export type Prato = {
   id: number
-  title: string
-  description: string
-  tags: string[]
-  rating: number
-  image: string
+  nome: string
+  descricao: string
+  foto: string
+  preco: number
+  porcao: string
+}
+
+export type Restaurante = {
+  id: number
+  titulo: string
+  destacado: boolean
+  tipo: string
+  avaliacao: number
+  descricao: string
+  capa: string
+  cardapio: Prato[]
 }

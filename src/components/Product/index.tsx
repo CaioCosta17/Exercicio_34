@@ -14,6 +14,7 @@ import {
 import EstrelaIcon from '../../assets/images/estrela.png'
 
 type Props = {
+  id: number
   title: string
   rating: number
   description: string
@@ -21,7 +22,7 @@ type Props = {
   image: string
 }
 
-const Product = ({ title, rating, description, tags, image }: Props) => (
+const Product = ({ id, title, rating, description, tags, image }: Props) => (
   <Card>
     <Capa style={{ backgroundImage: `url(${image})` }} />
     <TagsContainer>
@@ -38,7 +39,7 @@ const Product = ({ title, rating, description, tags, image }: Props) => (
         </div>
       </HeaderRow>
       <Description>{description}</Description>
-      <Link to="/perfil">
+      <Link to={`/perfil/${id}`}>
         <Button>Saiba mais</Button>
       </Link>
     </Content>

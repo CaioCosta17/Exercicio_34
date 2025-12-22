@@ -36,11 +36,11 @@ export const Sidebar = styled.aside`
   }
 
   @media (max-width: 768px) {
-    max-width: 80%; // Em tablets e celulares, deixa um espaço para ver o fundo
+    max-width: 80%;
   }
 
   @media (max-width: 480px) {
-    max-width: 90%; // Quase toda a tela em celulares muito pequenos
+    max-width: 90%;
   }
 `
 

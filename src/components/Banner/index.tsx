@@ -1,11 +1,16 @@
-import { ImagemFundo, Titulo, Categoria } from './styles'
-import capaImg from '../../assets/images/cardapio_vita_trattoria.png'
+import { ImagemFundo, Titulo, Tipo } from './styles'
 
-const Banner = () => (
-  <ImagemFundo style={{ backgroundImage: `url(${capaImg})` }}>
+type Props = {
+  capa: string
+  tipo: string
+  titulo: string
+}
+
+const Banner = ({ capa, tipo, titulo }: Props) => (
+  <ImagemFundo capa={capa}>
     <div className="container">
-      <Categoria>Italiana</Categoria>
-      <Titulo>La Dolce Vita Trattoria</Titulo>
+      <Tipo>{tipo}</Tipo>
+      <Titulo>{titulo}</Titulo>
     </div>
   </ImagemFundo>
 )

@@ -1,63 +1,46 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
-import HeaderProfile from '../../components/HeaderProfile'
-import Banner from '../../components/Banner'
-import Prato from '../../components/Prato'
-import Modal from '../../components/Modal'
-
+import { Restaurante } from '../../models/Restaurant'
 import { Container, List } from './styles'
 
-interface PratoAPI {
-  id: number
-  nome: string
-  descricao: string
-  foto: string
-  porcao: string
-  preco: number
-}
+import Header from '../../components/Header'
+import Prato from '../../components/Prato'
+import Banner from '../../components/Banner'
 
 const Perfil = () => {
-  const [pratos, setPratos] = useState<PratoAPI[]>([])
-  const [modalEstaAberto, setModalEstaAberto] = useState(false)
-  const [pratoSelecionado, setPratoSelecionado] = useState<PratoAPI | null>(
-    null
-  )
+  const { id } = useParams()
+  const [restaurante, setRestaurante] = useState<Restaurante>()
 
   useEffect(() => {
-    fetch('https://api-ebac.vercel.app/api/efood/restaurantes')
+    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
       .then((res) => res.json())
-      .then((res) => {
-        setPratos(res[0].cardapio)
-      })
-  }, [])
+      .then((res) => setRestaurante(res))
+  }, [id])
 
-  const abrirModal = (prato: PratoAPI) => {
-    setPratoSelecionado(prato)
-    setModalEstaAberto(true)
+  if (!restaurante) {
+    return <h3>Carregando...</h3>
   }
 
   return (
     <>
-      <HeaderProfile />
-      <Banner />
+      <Header />
 
-      <Container className="container">
-        <List>
-          {pratos.map((prato) => (
-            <Prato
-              key={prato.id}
-              prato={prato} // Passa o objeto completo aqui
-              aoClicar={() => abrirModal(prato)}
-            />
-          ))}
-        </List>
-      </Container>
-
-      <Modal
-        isOpen={modalEstaAberto}
-        onClose={() => setModalEstaAberto(false)}
-        prato={pratoSelecionado}
+      <Banner
+        capa={restaurante.capa}
+        tipo={restaurante.tipo}
+        titulo={restaurante.titulo}
       />
+
+      <Container>
+        <div className="container">
+          <List>
+            {restaurante.cardapio.map((prato) => (
+              <Prato key={prato.id} prato={prato} aoClicar={() => ''} />
+            ))}
+          </List>
+        </div>
+      </Container>
     </>
   )
 }
