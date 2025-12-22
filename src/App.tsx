@@ -12,7 +12,9 @@ function App() {
     <Provider store={store}>
       <GlobalStyle />
       <BrowserRouter>
-        <Rotas />
+        <div style={{ flex: 1 }}>
+          <Rotas />
+        </div>
         <Cart />
         <Footer />
       </BrowserRouter>

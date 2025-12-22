@@ -22,6 +22,12 @@ export const GlobalStyle = createGlobalStyle`
     color: #E66767;
   }
 
+  #root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
   .container {
     max-width: 1024px;
     width: 100%;
