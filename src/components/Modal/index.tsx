@@ -1,26 +1,21 @@
 import { useDispatch } from 'react-redux'
 
-import { add, open } from '../../store/cartSlice'
+import { add, open } from '../../store/reducers/cartSlice'
 
-import {
-  ModalContainer,
-  ModalContent,
-  Conteudo,
-  CloseButton,
-  ImagemPrato
-} from './styles'
 import fecharImg from '../../assets/images/close.png'
+
+import * as S from './styles'
 
 interface ModalProps {
   isOpen: boolean
   onClose: () => void
   prato: {
     id: number
-    foto: string
-    nome: string
-    descricao: string
-    porcao: string
-    preco: number
+    image: string
+    name: string
+    description: string
+    portion: string
+    price: number
   } | null
 }
 
@@ -36,24 +31,24 @@ const Modal = ({ isOpen, onClose, prato }: ModalProps) => {
   }
 
   return (
-    <ModalContainer>
+    <S.ModalContainer>
       <div className="overlay" onClick={onClose}></div>
-      <ModalContent>
-        <CloseButton src={fecharImg} alt="Fechar" onClick={onClose} />
+      <S.ModalContent>
+        <S.CloseButton src={fecharImg} alt="Fechar" onClick={onClose} />
 
-        <ImagemPrato src={prato.foto} alt={prato.nome} />
+        <S.ImagemPrato src={prato.image} alt={prato.name} />
 
-        <Conteudo>
-          <h3>{prato.nome}</h3>
-          <p>{prato.descricao}</p>
-          <p>Serve: {prato.porcao}</p>
+        <S.Conteudo>
+          <h3>{prato.name}</h3>
+          <p>{prato.description}</p>
+          <p>Serve: {prato.portion}</p>
           <button onClick={addToCart}>
             Adicionar ao carrinho - R${' '}
-            {prato.preco.toFixed(2).replace('.', ',')}
+            {prato.price.toFixed(2).replace('.', ',')}
           </button>
-        </Conteudo>
-      </ModalContent>
-    </ModalContainer>
+        </S.Conteudo>
+      </S.ModalContent>
+    </S.ModalContainer>
   )
 }
 

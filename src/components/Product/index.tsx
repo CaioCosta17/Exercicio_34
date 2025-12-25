@@ -1,17 +1,8 @@
 import { Link } from 'react-router-dom'
 
-import {
-  Card,
-  Capa,
-  TagsContainer,
-  Tag,
-  Content,
-  HeaderRow,
-  Description,
-  Button
-} from './styles'
-
 import EstrelaIcon from '../../assets/images/estrela.png'
+
+import * as S from './styles'
 
 type Props = {
   id: number
@@ -23,27 +14,27 @@ type Props = {
 }
 
 const Product = ({ id, title, rating, description, tags, image }: Props) => (
-  <Card>
-    <Capa style={{ backgroundImage: `url(${image})` }} />
-    <TagsContainer>
+  <S.Card>
+    <S.Capa style={{ backgroundImage: `url(${image})` }} />
+    <S.TagsContainer>
       {tags.map((tag) => (
-        <Tag key={tag}>{tag}</Tag>
+        <S.Tag key={tag}>{tag}</S.Tag>
       ))}
-    </TagsContainer>
-    <Content>
-      <HeaderRow>
+    </S.TagsContainer>
+    <S.Content>
+      <S.HeaderRow>
         <h3>{title}</h3>
         <div>
           {rating}
           <img src={EstrelaIcon} alt="Estrela" />
         </div>
-      </HeaderRow>
-      <Description>{description}</Description>
+      </S.HeaderRow>
+      <S.Description>{description}</S.Description>
       <Link to={`/perfil/${id}`}>
-        <Button>Saiba mais</Button>
+        <S.Button>Saiba mais</S.Button>
       </Link>
-    </Content>
-  </Card>
+    </S.Content>
+  </S.Card>
 )
 
 export default Product

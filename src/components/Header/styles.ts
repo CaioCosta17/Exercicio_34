@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { colors } from '../../styles'
 
 import Fundo from '../../assets/images/fundo.png'

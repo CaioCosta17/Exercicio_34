@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import { colors } from '../../styles'
+
 import headerBg from '../../assets/images/fundo.png'
 
 export const HeaderBar = styled.header`

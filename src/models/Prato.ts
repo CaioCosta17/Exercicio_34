@@ -1,22 +1,22 @@
 class Prato {
-  nome: string
-  descricao: string
-  foto: string
+  name: string
+  description: string
+  image: string
   id: number
-  preco: number
+  price: number
 
   constructor(
-    nome: string,
-    descricao: string,
-    foto: string,
+    name: string,
+    description: string,
+    image: string,
     id: number,
-    preco: number
+    price: number
   ) {
-    this.nome = nome
-    this.descricao = descricao
-    this.foto = foto
+    this.name = name
+    this.description = description
+    this.image = image
     this.id = id
-    this.preco = preco
+    this.price = price
   }
 }
 

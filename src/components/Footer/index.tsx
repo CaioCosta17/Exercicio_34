@@ -1,21 +1,22 @@
-import { FooterContainer, SocialLinks, Disclaimer, Logo } from './styles'
+import { Link } from 'react-router-dom'
 
 import Social from '../../assets/images/redes_sociais.png'
 import LogoImg from '../../assets/images/logo.png'
-import { Link } from 'react-router-dom'
+
+import * as S from './styles'
 
 const Footer = () => (
-  <FooterContainer>
+  <S.FooterContainer>
     <Link to="/">
-      <Logo src={LogoImg} />
+      <S.Logo src={LogoImg} />
     </Link>
-    <SocialLinks src={Social} />
-    <Disclaimer>
+    <S.SocialLinks src={Social} />
+    <S.Disclaimer>
       A efood é uma plataforma para divulgação de estabelecimentos, a
       responsabilidade pela entrega, qualidade dos produtos é toda do
       estabelecimento contratado.
-    </Disclaimer>
-  </FooterContainer>
+    </S.Disclaimer>
+  </S.FooterContainer>
 )
 
 export default Footer

@@ -1,6 +1,7 @@
 import Product from '../Product'
 import { Restaurante as RestauranteModel } from '../../models/Restaurant'
-import { Container, List } from './styles'
+
+import * as S from './styles'
 
 type Props = {
   restaurants: RestauranteModel[]
@@ -22,9 +23,9 @@ const ProductList = ({ restaurants }: Props) => {
   }
 
   return (
-    <Container>
+    <S.Container>
       <div className="container">
-        <List>
+        <S.List>
           {restaurants.map((restaurante) => (
             <Product
               key={restaurante.id}
@@ -36,9 +37,9 @@ const ProductList = ({ restaurants }: Props) => {
               tags={getTags(restaurante)}
             />
           ))}
-        </List>
+        </S.List>
       </div>
-    </Container>
+    </S.Container>
   )
 }
 
