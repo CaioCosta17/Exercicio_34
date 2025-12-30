@@ -15,34 +15,38 @@ const ConfirmationStep = () => {
   }
 
   return (
-    <S.CartContainer>
-      <S.SidebarTitle>Pedido realizado - {orderId}</S.SidebarTitle>
+    <S.CartContainer className="is-open">
+      <S.Overlay onClick={handleFinish} />
 
-      <S.TextMessage>
-        Estamos felizes em informar que seu pedido já está em processo de
-        preparação e, em breve, será entregue no endereço fornecido.
-      </S.TextMessage>
+      <S.SidebarContainer>
+        <S.MessageContainer>
+          <h3>Pedido realizado - {orderId}</h3>
 
-      <S.TextMessage>
-        Gostaríamos de ressaltar que nossos entregadores não estão autorizados a
-        realizar cobranças extras.
-      </S.TextMessage>
+          <p>
+            Estamos felizes em informar que seu pedido já está em processo de
+            preparação e, em breve, será entregue no endereço fornecido.
+          </p>
+          <p>
+            Gostaríamos de ressaltar que nossos entregadores não estão
+            autorizados a realizar cobranças extras.
+          </p>
+          <p>
+            Lembre-se da importância de higienizar as mãos após o recebimento do
+            pedido, garantindo assim sua segurança e bem-estar durante a
+            refeição.
+          </p>
+          <p>
+            Esperamos que desfrute de uma deliciosa e agradável experiência
+            gastronômica. Bom apetite!
+          </p>
+        </S.MessageContainer>
 
-      <S.TextMessage>
-        Lembre-se da importância de higienizar as mãos após o recebimento do
-        pedido, garantindo assim sua segurança e bem-estar durante a refeição.
-      </S.TextMessage>
-
-      <S.TextMessage>
-        Esperamos que desfrute de uma deliciosa e agradável experiência
-        gastronômica. Bom apetite!
-      </S.TextMessage>
-
-      <S.ButtonContainer>
-        <S.PrimaryButton type="button" onClick={handleFinish}>
-          Concluir
-        </S.PrimaryButton>
-      </S.ButtonContainer>
+        <S.ButtonContainer>
+          <S.PrimaryButton type="button" onClick={handleFinish}>
+            Concluir
+          </S.PrimaryButton>
+        </S.ButtonContainer>
+      </S.SidebarContainer>
     </S.CartContainer>
   )
 }

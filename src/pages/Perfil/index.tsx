@@ -1,46 +1,31 @@
-import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { useGetRestaurantQuery } from '../../services/api'
 
-import { Restaurante } from '../../models/Restaurant'
-import { Container, List } from './styles'
-
-import Header from '../../components/Header'
-import Prato from '../../components/Prato'
 import Banner from '../../components/Banner'
+import Menu from '../../components/PratoList'
+import HeaderProfile from '../../components/HeaderProfile'
+
+type RestaurantParams = {
+  id: string
+}
 
 const Perfil = () => {
-  const { id } = useParams()
-  const [restaurante, setRestaurante] = useState<Restaurante>()
+  const { id } = useParams() as RestaurantParams
+  const { data: restaurant } = useGetRestaurantQuery(id)
 
-  useEffect(() => {
-    fetch(`https://api-ebac.vercel.app/api/efood/restaurantes/${id}`)
-      .then((res) => res.json())
-      .then((res) => setRestaurante(res))
-  }, [id])
-
-  if (!restaurante) {
+  if (!restaurant) {
     return <h3>Carregando...</h3>
   }
 
   return (
     <>
-      <Header />
-
+      <HeaderProfile />
       <Banner
-        capa={restaurante.capa}
-        tipo={restaurante.tipo}
-        titulo={restaurante.titulo}
+        capa={restaurant.capa}
+        tipo={restaurant.tipo}
+        titulo={restaurant.titulo}
       />
-
-      <Container>
-        <div className="container">
-          <List>
-            {restaurante.cardapio.map((prato) => (
-              <Prato key={prato.id} prato={prato} aoClicar={() => ''} />
-            ))}
-          </List>
-        </div>
-      </Container>
+      <Menu items={restaurant.cardapio} />
     </>
   )
 }

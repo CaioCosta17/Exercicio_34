@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { RootReducer } from '../reducers'
-import Prato from '../../models/Prato'
+import { Plate } from '../../models/Prato'
 
 type Delivery = {
   receiver: string
@@ -23,7 +23,7 @@ export type Product = {
 export type CheckoutStep = 'cart' | 'delivery' | 'payment' | 'confirmation'
 
 type CartState = {
-  items: Prato[]
+  items: Plate[]
   isOpen: boolean
   currentStep: CheckoutStep
   orderId?: string
@@ -40,7 +40,7 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<Prato>) => {
+    add: (state, action: PayloadAction<Plate>) => {
       const itemExists = state.items.find(
         (item) => item.id === action.payload.id
       )
@@ -48,12 +48,14 @@ const cartSlice = createSlice({
         state.items.push(action.payload)
       }
       state.isOpen = true
+      state.currentStep = 'cart'
     },
     remove: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter((item) => item.id !== action.payload)
     },
     open: (state) => {
       state.isOpen = true
+      state.currentStep = 'cart'
     },
     close: (state) => {
       state.isOpen = false

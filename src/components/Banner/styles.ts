@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { colors } from '../../styles'
 
 interface ImagemFundoProps {
-  capa: string
+  $capa: string
 }
 
 export const ImagemFundo = styled.div<ImagemFundoProps>`
@@ -12,7 +12,7 @@ export const ImagemFundo = styled.div<ImagemFundoProps>`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-image: url(${(props) => props.capa});
+  background-image: url(${(props) => props.$capa});
 
   position: relative;
 

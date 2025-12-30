@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { colors } from '../../styles'
 
-import lixeira from '../../assets/images/lixeira-de-reciclagem 1.png'
+import trashIcon from '../../assets/images/lixeira-de-reciclagem 1.png'
 
 export const Overlay = styled.div`
   position: fixed;
@@ -38,7 +38,6 @@ export const SidebarContainer = styled.aside`
   ul {
     list-style: none;
     margin-bottom: 24px;
-    flex: 1;
     overflow-y: auto;
   }
 
@@ -88,7 +87,7 @@ export const CartItem = styled.li`
   }
 
   button {
-    background-image: url(${lixeira});
+    background-image: url(${trashIcon});
     width: 16px;
     height: 16px;
     border: none;
@@ -159,11 +158,7 @@ export const InputGroup = styled.div`
 
 export const Row = styled.div`
   display: flex;
-  gap: 34px;
-
-  ${InputGroup} {
-    flex: 1;
-  }
+  column-gap: 34px;
 `
 
 export const ButtonContainer = styled.div`
@@ -185,15 +180,26 @@ export const PrimaryButton = styled.button`
 `
 
 export const SecondaryButton = styled(PrimaryButton)`
-  background-color: transparent;
+  background-color: ${colors.footerHeaderBg};
   border: none;
-  color: ${colors.footerHeaderBg};
+  color: ${colors.primary};
 `
 
-export const TextMessage = styled.p`
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 22px;
-  color: ${colors.footerHeaderBg};
-  margin-bottom: 24px;
+export const MessageContainer = styled.div`
+  margin-top: 22px;
+
+  h3 {
+    color: ${colors.footerHeaderBg};
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 22px;
+  }
+
+  p {
+    color: ${colors.footerHeaderBg};
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    margin-bottom: 24px;
+  }
 `

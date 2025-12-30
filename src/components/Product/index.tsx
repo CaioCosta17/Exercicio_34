@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import EstrelaIcon from '../../assets/images/estrela.png'
+import StarIcon from '../../assets/images/estrela.png'
 
 import * as S from './styles'
 
@@ -26,7 +26,7 @@ const Product = ({ id, title, rating, description, tags, image }: Props) => (
         <h3>{title}</h3>
         <div>
           {rating}
-          <img src={EstrelaIcon} alt="Estrela" />
+          <img src={StarIcon} alt="Estrela" />
         </div>
       </S.HeaderRow>
       <S.Description>{description}</S.Description>

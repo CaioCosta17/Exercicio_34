@@ -5,9 +5,14 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { RootReducer } from '../../store/reducers'
 import { usePurchaseMutation } from '../../services/api'
-import { finishCheckout, selectCartTotal } from '../../store/reducers/cartSlice'
+import {
+  finishCheckout,
+  selectCartTotal,
+  setCheckoutStep
+} from '../../store/reducers/cartSlice'
 
 import * as S from './styles'
+import { parseBrl } from '../../utils'
 
 const PaymentStep = () => {
   const dispatch = useDispatch()
@@ -41,7 +46,7 @@ const PaymentStep = () => {
         const res = await purchase({
           products: items.map((item) => ({
             id: item.id,
-            price: item.price
+            price: item.price as number
           })),
           delivery: {
             receiver: delivery.receiver,
@@ -69,7 +74,6 @@ const PaymentStep = () => {
         dispatch(finishCheckout(res.orderId))
       } catch (error) {
         console.error(error)
-        alert('Erro ao processar pagamento.')
       }
     }
   })
@@ -83,7 +87,7 @@ const PaymentStep = () => {
   return (
     <S.FormContainer onSubmit={formik.handleSubmit}>
       <S.SidebarTitle>
-        Pagamento - Valor a pagar R$ {totalAmount}
+        Pagamento - Valor a pagar R$ {parseBrl(totalAmount)}
       </S.SidebarTitle>
 
       <S.InputGroup>
@@ -170,6 +174,13 @@ const PaymentStep = () => {
         <S.PrimaryButton type="submit" disabled={isLoading}>
           {isLoading ? 'Finalizando...' : 'Finalizar pagamento'}
         </S.PrimaryButton>
+
+        <S.SecondaryButton
+          type="button"
+          onClick={() => dispatch(setCheckoutStep('delivery'))}
+        >
+          Voltar para a edição de endereço
+        </S.SecondaryButton>
       </S.ButtonContainer>
     </S.FormContainer>
   )

@@ -1,5 +1,4 @@
 import { Prato as PratoModel } from '../../models/Restaurant'
-
 import * as S from './styles'
 
 type Props = {
@@ -16,11 +15,11 @@ const Prato = ({ prato, aoClicar }: Props) => {
   }
 
   return (
-    <S.Card>
+    <S.Card onClick={aoClicar}>
       <S.Foto src={prato.foto} alt={prato.nome} />
       <S.Titulo>{prato.nome}</S.Titulo>
       <S.Descricao>{getDescricao(prato.descricao)}</S.Descricao>
-      <S.Botao onClick={aoClicar}>Mais detalhes</S.Botao>
+      <S.Botao>Mais detalhes</S.Botao>
     </S.Card>
   )
 }

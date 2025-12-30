@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux'
 
 import { add, open } from '../../store/reducers/cartSlice'
+import { Plate } from '../../models/Prato'
 
 import fecharImg from '../../assets/images/close.png'
 
@@ -9,14 +10,7 @@ import * as S from './styles'
 interface ModalProps {
   isOpen: boolean
   onClose: () => void
-  prato: {
-    id: number
-    image: string
-    name: string
-    description: string
-    portion: string
-    price: number
-  } | null
+  prato: Plate
 }
 
 const Modal = ({ isOpen, onClose, prato }: ModalProps) => {
@@ -25,7 +19,16 @@ const Modal = ({ isOpen, onClose, prato }: ModalProps) => {
   if (!isOpen || !prato) return null
 
   const addToCart = () => {
-    dispatch(add(prato))
+    const itemDoCarrinho = {
+      id: prato.id,
+      image: prato.image,
+      name: prato.name,
+      description: prato.description,
+      portion: prato.portion,
+      price: prato.price
+    }
+
+    dispatch(add(itemDoCarrinho))
     dispatch(open())
     onClose()
   }
