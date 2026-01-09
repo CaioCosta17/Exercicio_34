@@ -23,11 +23,21 @@ const DeliveryStep = () => {
       receiver: Yup.string()
         .min(5, 'O nome precisa ter pelo menos 5 caracteres')
         .required('O campo é obrigatório'),
+
       address: Yup.string().required('O campo é obrigatório'),
+
       city: Yup.string().required('O campo é obrigatório'),
+
       cep: Yup.string()
-        .min(9, 'O CEP precisa ter 9 caracteres')
-        .required('O campo é obrigatório'),
+        .required('O campo é obrigatório')
+        .test('is-cep', 'O CEP precisa ter 8 números', (value) => {
+          if (!value) return false
+
+          const onlyNumbers = value.replace(/\D/g, '')
+
+          return onlyNumbers.length === 8
+        }),
+
       number: Yup.string().required('O campo é obrigatório')
     }),
     onSubmit: (values) => {
@@ -120,7 +130,11 @@ const DeliveryStep = () => {
               type="text"
               name="number"
               value={formik.values.number}
-              onChange={formik.handleChange}
+              onChange={(e) => {
+                const onlyNumbers = e.target.value.replace(/\D/g, '')
+
+                formik.setFieldValue('number', onlyNumbers)
+              }}
               onBlur={formik.handleBlur}
               className={getErrorMessage('number') ? 'error' : ''}
             />
@@ -143,7 +157,7 @@ const DeliveryStep = () => {
         <S.ButtonContainer>
           <S.PrimaryButton
             type="submit"
-            disabled={!formik.isValid && formik.dirty}
+            title="Clique para continuar com o pagamento"
           >
             Continuar com o pagamento
           </S.PrimaryButton>

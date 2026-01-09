@@ -21,6 +21,14 @@ const PaymentStep = () => {
   const { items, delivery } = useSelector((state: RootReducer) => state.cart)
   const totalAmount = useSelector(selectCartTotal)
 
+  const checkNumberLength = (targetLength: number) => {
+    return (value?: string) => {
+      if (!value) return false
+      const onlyNumbers = value.replace(/\D/g, '')
+      return onlyNumbers.length === targetLength
+    }
+  }
+
   const formik = useFormik({
     initialValues: {
       cardName: '',
@@ -30,11 +38,37 @@ const PaymentStep = () => {
       expiresYear: ''
     },
     validationSchema: Yup.object({
-      cardName: Yup.string().required('Obrigatório'),
-      cardNumber: Yup.string().required('Obrigatório'),
-      cvv: Yup.string().required('Obrigatório').max(3),
-      expiresMonth: Yup.string().required('Obrigatório'),
-      expiresYear: Yup.string().required('Obrigatório')
+      cardName: Yup.string()
+        .min(5, 'O nome precisa ser completo')
+        .required('O campo é obrigatório'),
+
+      cardNumber: Yup.string()
+        .required('O campo é obrigatório')
+        .test(
+          'is-valid-card',
+          'O cartão precisa ter 16 números',
+          checkNumberLength(16)
+        ),
+
+      cvv: Yup.string()
+        .required('O campo é obrigatório')
+        .test(
+          'is-valid-cvv',
+          'O CVV precisa de 3 números',
+          checkNumberLength(3)
+        ),
+
+      expiresMonth: Yup.string()
+        .required('O campo é obrigatório')
+        .test('is-valid-month', 'Mês incorreto', (value) => {
+          if (!value) return false
+          const mes = Number(value.replace(/\D/g, ''))
+          return mes >= 1 && mes <= 12
+        }),
+
+      expiresYear: Yup.string()
+        .required('O campo é obrigatório')
+        .test('is-valid-year', 'Ano incorreto', checkNumberLength(2))
     }),
     onSubmit: async (values) => {
       if (!delivery) {
@@ -87,7 +121,7 @@ const PaymentStep = () => {
   return (
     <S.FormContainer onSubmit={formik.handleSubmit}>
       <S.SidebarTitle>
-        Pagamento - Valor a pagar R$ {parseBrl(totalAmount)}
+        Pagamento - Valor a pagar {parseBrl(totalAmount)}
       </S.SidebarTitle>
 
       <S.InputGroup>
@@ -97,7 +131,13 @@ const PaymentStep = () => {
           type="text"
           name="cardName"
           value={formik.values.cardName}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            const onlyLetters = e.target.value.replace(
+              /[^a-zA-Z\u00C0\u00FF ]/g,
+              ''
+            )
+            formik.setFieldValue('cardName', onlyLetters)
+          }}
           onBlur={formik.handleBlur}
           className={getErrorMessage('cardName') ? 'error' : ''}
         />

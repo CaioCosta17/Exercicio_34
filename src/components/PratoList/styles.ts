@@ -10,7 +10,7 @@ export const Container = styled.div<Props>`
   padding-top: 56px;
   padding-bottom: 120px;
   background-color: ${(props) =>
-    props.background === 'black' ? '#333333' : '#FFEBD9'};
+    props.background === 'black' ? '#333333' : '#FFEBF2'};
 `
 
 export const List = styled.div`
